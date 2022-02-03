@@ -1,0 +1,21 @@
+<ul style="list-style: none;" class="list-group-flush">
+
+    {% for comment  in  comments %}
+
+    <li class="list-group-item p-2">
+        <a class="text-dark" href="{% url 'post_detail' comment.post.pk %}">
+
+            {% if comment.body|length > 40 %}
+            {{comment.body|slice:'45'}} ..
+            {% else %}
+            {{comment.body}}
+            {% endif %}
+
+        </a>
+
+    </li>
+    {% empty %}
+    <li class="list-group-item p-2">no comments</li>
+    {% endfor %}
+
+</ul>

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="border p-3 mb-3">
+    <img class="img-fluid rounded  m-2 " src="{{post.author.profile.image.url}}" width="100px" alt="">
+    <span class="text-secondary">post in {{post.post_date|date:'d-m-Y'}}</span>
+    <!-- Button of editing -->
+
+
+    {% if  post.author == user %}
+    <div class="form-group" style="float:right;">
+        <a href="#" class="btn btn-secondary">تحرير</a>
+        <a href="#" class="btn btn-danger">حذف</a>
+
+
+    </div>
+    {% endif %}
+
+
+    <h3>{{post.title}}</h3>
+    <p>{{post.content}}</p>
+</div>
+!-- Display Comments -->
+<h2 class="border-bottom mt-5 mb-3">comments ({{comments.count}})</h2>
+{% for comment in comments %}
+<ul class="p-3 comment">
+    <h6 class="border-bottom p-2">( {{comment.name}} ) <span
+            class="text-secondary">{{comment.comment_date|date:'d-m-Y'}}</span></h6>
+    {{comment.body}}
+</ul>
+{% empty %}
+<h6 class="text-center p-4 mb-3 comment">no comments </h6>
+{% endfor %}
+
+<!-- Comment Form -->
+<h3 class="border-bottom pb-3 mb-3 mt-5">add new comment </h3>
+<div class="border p-4 mb-5 mt-4">
+    <form method="POST">
+        {% csrf_token %}
+        {{comment_form|crispy}}
+        <input class="btn btn-secondary" type="submit" value="post comment">
+    </form>
+</div>
+
+
+{% endblock content %}

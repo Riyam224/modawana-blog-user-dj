@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+{% for post in  posts %}
+<div style="border: 1px solid #ccc;" class="p-3 mb-4">
+    <img class="img-fluid rounded  m-2 " src="{{post.author.image.url}}" width="100px" alt="">
+    <span class="text-secondary">post in {{post.post_dt|date:'d-m-Y'}}</span>
+    <h4 class="text-dark"><a href="{% url 'post_detail' post.pk %}">{{post.title}}</a></h4>
+    <p>{{post.content}}</p>
+</div>
+{% endfor %}
+
+
+<!-- todo paginations  -->
+
+
+
+
+
+<div>
+    <h4>comments</h4>
+
+    {% for comment in comments  %}
+
+    <small>{{comment.name}} at {{comment.comment_dt|date:'d-m-Y'}}</small>
+
+    {% endfor %}
+
+
+</div>
+
+
+
+{% endblock content %}
