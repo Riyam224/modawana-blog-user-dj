@@ -1,5 +1,5 @@
 from django import template
-from modawana.models import Post, Comment
+from blog.models import Post, Comment
 
 register = template.Library()
 @register.inclusion_tag('latest_posts.html')

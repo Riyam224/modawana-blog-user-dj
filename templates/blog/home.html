@@ -1,8 +1,21 @@
 {% extends 'base.html' %}
 {% load static %}
-
-
 {% block content %}
+
+{% if messages %}
+
+
+{% for message  in  messages %}
+
+<div class="alert alert-{{message.tags}}">
+    {{message}}
+</div>
+
+{% endfor %}
+
+
+{% endif %}
+
 
 {% for post in  posts %}
 <div style="border: 1px solid #ccc;" class="p-3 mb-4">
@@ -12,14 +25,7 @@
     <p>{{post.content}}</p>
 </div>
 {% endfor %}
-
-
 <!-- todo paginations  -->
-
-
-
-
-
 <div>
     <h4>comments</h4>
 
