@@ -18,8 +18,15 @@ class Post(models.Model):
 
 
     class Meta:
+
         verbose_name = _("Post")
         verbose_name_plural = _("Posts")
+
+        ordering = ('-post_dt',)
+
+    def get_absolute_url(self):
+        return '/detail/{}'.format(self.pk)
+        # return reverse('detail', args=[self.pk])
 
     def __str__(self):
         return self.title
